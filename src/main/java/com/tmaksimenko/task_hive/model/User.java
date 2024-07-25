@@ -1,5 +1,6 @@
 package com.tmaksimenko.task_hive.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -23,6 +24,7 @@ public class User {
 
     String username;
 
+    @JsonIgnore
     String password;
 
     @CreationTimestamp
