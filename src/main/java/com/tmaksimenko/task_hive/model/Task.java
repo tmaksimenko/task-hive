@@ -1,7 +1,6 @@
 package com.tmaksimenko.task_hive.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
