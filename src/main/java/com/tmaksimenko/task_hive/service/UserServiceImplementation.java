@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,12 +40,27 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User deleteUser(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            userRepository.deleteById(id);
-            return user.get();
-        }
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND));
+        user = emancipateUser(user);
+        userRepository.deleteById(id);
+        return user;
+    }
+
+    /**
+     * This method exists in order to detach the user from the persistence context in
+     * preparation for a delete operation that typically causes the lazily loaded
+     * user to have no data
+     * @param user is any User
+     * @return user, a value copy of the original
+     */
+    private User emancipateUser (User user) {
+        return User.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .createTime(user.getCreateTime())
+                .password(user.getPassword())
+                .tasks(new ArrayList<>(user.getTasks()))
+                .build();
     }
 }
