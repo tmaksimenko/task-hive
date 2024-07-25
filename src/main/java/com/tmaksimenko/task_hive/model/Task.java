@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 public class Task {
 
     @Id
-    long id;
+    Long id;
 
     @ManyToOne
     User user;

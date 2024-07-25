@@ -19,7 +19,7 @@ import java.util.List;
 public class User {
 
     @Id
-    long id;
+    Long id;
 
     String username;
 
