@@ -1,8 +1,6 @@
 package com.tmaksimenko.task_hive.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "tasks")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +17,7 @@ import java.sql.Timestamp;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @ManyToOne

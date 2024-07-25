@@ -1,8 +1,6 @@
 package com.tmaksimenko.task_hive.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,6 +18,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     String username;
