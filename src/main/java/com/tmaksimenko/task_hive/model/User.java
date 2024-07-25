@@ -3,6 +3,7 @@ package com.tmaksimenko.task_hive.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Timestamp;
@@ -25,7 +26,7 @@ public class User {
 
     String password;
 
-    @CreatedDate
+    @CreationTimestamp
     Timestamp createTime;
 
     @OneToMany(mappedBy = "user")

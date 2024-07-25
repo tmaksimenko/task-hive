@@ -3,6 +3,7 @@ package com.tmaksimenko.task_hive.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Timestamp;
@@ -31,7 +32,7 @@ public class Task {
 
     Boolean completed;
 
-    @CreatedDate
+    @CreationTimestamp
     Timestamp createTime;
 
 }
