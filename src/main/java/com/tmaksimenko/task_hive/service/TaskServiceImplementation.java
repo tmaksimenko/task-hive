@@ -8,7 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +51,10 @@ public class TaskServiceImplementation implements TaskService {
 
     @Override
     public Task updateTask(Task task) {
-        return taskRepository.save(task);
+        Optional<Task> foundTask = taskRepository.findById(task.getId());
+        if (foundTask.isPresent())
+            return taskRepository.save(task);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No task found with this id");
     }
 
     @Override

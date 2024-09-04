@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,10 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User updateUser(User user) {
-        return userRepository.save(user);
+        Optional<User> foundUser = userRepository.findById(user.getId());
+        if (foundUser.isPresent())
+            return userRepository.save(user);
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No user found with this id");
     }
 
     @Override
